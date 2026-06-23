@@ -1,0 +1,8 @@
+venv/
+.env
+__pycache__/
+*.pyc
+.DS_Store
+data/temp_resume.pdf
+*.txt
+!README.md
