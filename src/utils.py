@@ -1,4 +1,4 @@
-import PyPDF2
+from pypdf import PdfReader
 import re
 
 
@@ -21,17 +21,15 @@ def read_text_file(filepath):
 
 
 def extract_text_from_pdf(pdf_path):
-    """Takes a path to a PDF file and returns all text inside it."""
     text = ""
     with open(pdf_path, 'rb') as file:
-        reader = PyPDF2.PdfReader(file)
-        for page_num in range(len(reader.pages)):
-            page = reader.pages[page_num]
+        reader = PdfReader(file)
+        for page in reader.pages:
             extracted = page.extract_text()
             if extracted:
                 text += extracted + "\n"
     if len(text.strip()) < 50:
-        print("WARNING: Very little text extracted. PDF might be scanned.")
+        print("WARNING: Very little text extracted.")
     return text
 
 
