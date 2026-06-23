@@ -7,9 +7,6 @@ import os
 import time
 
 sys.path.insert(0, 'src')
-import subprocess
-subprocess.run(["python", "-m", "spacy", "download", "en_core_web_sm"],
-               capture_output=True)
 
 from utils import extract_text_from_pdf, clean_text
 from skill_extractor import extract_skills_from_resume, get_resume_skill_profile
