@@ -233,6 +233,16 @@ def generate_text_report(score_results, ai_report, feedback, role):
 
 # ── Sidebar ───────────────────────────────────────────────────────────────────
 with st.sidebar:
+    st.markdown("""
+    <div style="text-align:center; padding: 10px 0 16px 0;">
+        <div style="font-size: 2.5rem;">🧠</div>
+        <div style="font-size: 1.3rem; font-weight: 700; 
+             color: #6366F1;">ResumeIQ</div>
+        <div style="font-size: 0.75rem; color: #64748B;">
+             Know where you stand
+        </div>
+    </div>
+    """, unsafe_allow_html=True)
     st.markdown("## ⚙️ Settings")
     st.markdown("---")
 
@@ -295,23 +305,70 @@ uploaded_file = st.file_uploader(
 # ── Instructions when no file ─────────────────────────────────────────────────
 if uploaded_file is None:
     st.markdown("---")
+
+    # Welcome banner
+    st.markdown("""
+    <div style="background: linear-gradient(135deg, #1E293B, #0F172A);
+         border-radius: 16px; padding: 32px; text-align: center;
+         border: 1px solid #334155; margin: 10px 0 24px 0;">
+        <div style="font-size: 3rem; margin-bottom: 12px;">🧠</div>
+        <h2 style="color: #E2E8F0; font-size: 1.6rem; margin: 0 0 8px 0;">
+            Welcome to ResumeIQ
+        </h2>
+        <p style="color: #94A3B8; font-size: 1rem; margin: 0 0 20px 0;">
+            Upload your resume and find out exactly where you stand
+        </p>
+        <div style="display: flex; justify-content: center; gap: 16px; 
+             flex-wrap: wrap; margin-top: 16px;">
+            <div style="background:#1E3A2F; border:1px solid #10B981; 
+                 border-radius:8px; padding:10px 18px; color:#6EE7B7; 
+                 font-size:0.85rem;">✅ Resume Score out of 100</div>
+            <div style="background:#1E1B4B; border:1px solid #6366F1; 
+                 border-radius:8px; padding:10px 18px; color:#A5B4FC; 
+                 font-size:0.85rem;">🎯 Skill Gap Analysis</div>
+            <div style="background:#2D1B00; border:1px solid #F59E0B; 
+                 border-radius:8px; padding:10px 18px; color:#FCD34D; 
+                 font-size:0.85rem;">🤖 AI-Powered Feedback</div>
+            <div style="background:#450A0A; border:1px solid #EF4444; 
+                 border-radius:8px; padding:10px 18px; color:#FCA5A5; 
+                 font-size:0.85rem;">📚 Learning Roadmap</div>
+        </div>
+    </div>
+    """, unsafe_allow_html=True)
+
+    # Steps
     c1, c2, c3, c4 = st.columns(4)
     with c1:
-        st.markdown("### 1️⃣ Upload\nUpload your resume PDF above")
+        st.markdown("""<div style="text-align:center; padding:12px;">
+            <div style="font-size:1.8rem;">📤</div>
+            <strong>Step 1</strong><br>
+            <small style="color:#94A3B8;">Upload your resume PDF</small>
+        </div>""", unsafe_allow_html=True)
     with c2:
-        st.markdown("### 2️⃣ Select Role\nChoose target role in sidebar")
+        st.markdown("""<div style="text-align:center; padding:12px;">
+            <div style="font-size:1.8rem;">🎯</div>
+            <strong>Step 2</strong><br>
+            <small style="color:#94A3B8;">Select your target role</small>
+        </div>""", unsafe_allow_html=True)
     with c3:
-        st.markdown("### 3️⃣ Analyze\nGet instant score and feedback")
+        st.markdown("""<div style="text-align:center; padding:12px;">
+            <div style="font-size:1.8rem;">📊</div>
+            <strong>Step 3</strong><br>
+            <small style="color:#94A3B8;">Get your instant score</small>
+        </div>""", unsafe_allow_html=True)
     with c4:
-        st.markdown("### 4️⃣ Improve\nFollow action items and roadmap")
+        st.markdown("""<div style="text-align:center; padding:12px;">
+            <div style="font-size:1.8rem;">🚀</div>
+            <strong>Step 4</strong><br>
+            <small style="color:#94A3B8;">Fix gaps and apply</small>
+        </div>""", unsafe_allow_html=True)
 
     st.markdown("---")
-    st.info("👈 Select your target role from the sidebar, then upload your resume PDF")
+    st.info("👈 Select your target role from the sidebar, then upload your resume PDF above")
 
-    # Show sample metrics so user knows what to expect
     st.markdown("### 📊 What you'll get:")
     m1, m2, m3, m4 = st.columns(4)
-    m1.metric("Resume Score", "0-100", "Overall match")
+    m1.metric("Resume Score", "0–100", "Overall match")
     m2.metric("Skill Analysis", "Found/Missing", "Required skills")
     m3.metric("JD Match", "TF-IDF %", "Job description fit")
     m4.metric("AI Feedback", "Personalized", "Actionable tips")
@@ -407,17 +464,21 @@ else:
 
     # Big score display
     col_score, col_info = st.columns([1, 3])
+    
     with col_score:
         st.markdown(
-            f'<div style="text-align:center; padding: 20px; '
-            f'background: #1E293B; border-radius: 12px; '
-            f'border: 2px solid {score_color};">'
-            f'<div style="font-size:0.9rem; color:#94A3B8; '
-            f'margin-bottom:5px;">OVERALL SCORE</div>'
-            f'<div style="font-size:3.5rem; font-weight:800; '
+            f'<div style="text-align:center; padding: 24px 20px; '
+            f'background: linear-gradient(135deg, #1E293B, #0F172A); '
+            f'border-radius: 16px; border: 2px solid {score_color}; '
+            f'box-shadow: 0 0 20px {score_color}33;">'
+            f'<div style="font-size:0.8rem; color:#94A3B8; '
+            f'letter-spacing:.1em; margin-bottom:6px;">OVERALL SCORE</div>'
+            f'<div style="font-size:4rem; font-weight:900; '
             f'color:{score_color}; line-height:1;">{score}</div>'
-            f'<div style="font-size:1rem; color:#E2E8F0;">/100</div>'
-            f'<div style="font-size:1.5rem; margin-top:8px;">Grade: {grade}</div>'
+            f'<div style="font-size:0.9rem; color:#64748B;">/100</div>'
+            f'<div style="margin-top:10px; font-size:1.8rem;">{score_emoji}</div>'
+            f'<div style="font-size:1.1rem; font-weight:600; '
+            f'color:{score_color}; margin-top:4px;">Grade: {grade}</div>'
             f'</div>',
             unsafe_allow_html=True
         )
@@ -642,7 +703,22 @@ else:
     )
 
     st.markdown("---")
-    st.markdown(
-        "<center><small>Built with Python · spaCy · "
-        "scikit-learn · TF-IDF · Streamlit</small></center>",
-        unsafe_allow_html=True)
+    st.markdown("""
+    <div style="text-align:center; padding: 20px 0 10px 0; 
+        border-top: 1px solid #334155; margin-top: 20px;">
+        <p style="color:#94A3B8; font-size:0.85rem; margin:0;">
+            🧠 <strong style="color:#6366F1;">ResumeIQ</strong> — 
+            Know exactly where you stand.
+        </p>
+        <p style="color:#64748B; font-size:0.75rem; margin:4px 0 0 0;">
+            Built with Python · scikit-learn · TF-IDF · 
+            Streamlit · Google Gemini API
+        </p>
+        <p style="color:#64748B; font-size:0.75rem; margin:4px 0 0 0;">
+            Made by <a href="https://www.linkedin.com/in/amisha-upadhyay-402796378" 
+            style="color:#6366F1; text-decoration:none;">Amisha Upadhyay</a> · 
+            <a href="https://github.com/amishau209-carat/resume-analyzer" 
+            style="color:#6366F1; text-decoration:none;">GitHub</a>
+        </p>
+    </div>
+    """, unsafe_allow_html=True)
