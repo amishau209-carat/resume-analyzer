@@ -17,12 +17,16 @@ from skills_database import get_all_roles
 
 # ── Page Config ───────────────────────────────────────────────────────────────
 st.set_page_config(
-    page_title="ResumeIQ",
+    page_title="ResumeIQ — AI Resume Analyzer",
     page_icon="🧠",
     layout="wide",
-    initial_sidebar_state="expanded"
+    initial_sidebar_state="expanded",
+    menu_items={
+        'Get Help': 'https://github.com/amishau209-carat/resume-analyzer',
+        'Report a bug': 'mailto:amishau209@gmail.com',
+        'About': "# ResumeIQ\nAI-powered resume analyzer. Know exactly where you stand."
+    }
 )
-
 # ── Custom CSS ────────────────────────────────────────────────────────────────
 st.markdown("""
 <style>
@@ -247,20 +251,29 @@ with st.sidebar:
     st.markdown("---")
 
     roles = get_all_roles()
-    role_labels = {
-        "data_scientist":            "🔬 Data Scientist",
-        "software_engineer":         "💻 Software Engineer",
-        "web_developer":             "🌐 Web Developer",
-        "devops_engineer":           "🔧 DevOps Engineer",
-        "machine_learning_engineer": "🤖 ML Engineer"
+    role_descriptions = {
+    "data_scientist":            "🔬 Data Scientist",
+    "software_engineer":         "💻 Software Engineer",
+    "web_developer":             "🌐 Web Developer",
+    "devops_engineer":           "🔧 DevOps Engineer",
+    "machine_learning_engineer": "🤖 ML Engineer"
     }
 
     selected_role = st.selectbox(
-        "Target Role",
-        options=roles,
-        format_func=lambda x: role_labels.get(x, x),
-        help="Select the job role you are targeting"
+    "Target Role",
+    options=roles,
+    format_func=lambda x: role_descriptions.get(x, x),
     )
+
+
+    role_tips = {
+    "data_scientist":            "Focus: Python, ML, Statistics, SQL",
+    "software_engineer":         "Focus: DSA, System Design, Git",
+    "web_developer":             "Focus: HTML, CSS, JS, React",
+    "devops_engineer":           "Focus: Docker, Kubernetes, AWS",
+    "machine_learning_engineer": "Focus: PyTorch, MLOps, Deployment"
+    }
+    st.caption(role_tips.get(selected_role, ""))
 
     st.markdown("---")
     st.markdown("#### 📋 Job Description (Optional)")
