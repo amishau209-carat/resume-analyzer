@@ -17,8 +17,8 @@ from skills_database import get_all_roles
 
 # ── Page Config ───────────────────────────────────────────────────────────────
 st.set_page_config(
-    page_title="AI Resume Analyzer",
-    page_icon="📄",
+    page_title="ResumeIQ",
+    page_icon="🧠",
     layout="wide",
     initial_sidebar_state="expanded"
 )
@@ -280,11 +280,9 @@ with st.sidebar:
 
 
 # ── Header ────────────────────────────────────────────────────────────────────
-st.markdown('<p class="main-header">📄 AI Resume Analyzer</p>',
+st.markdown('<p class="main-header">🧠 ResumeIQ</p>',
             unsafe_allow_html=True)
-st.markdown(
-    '<p class="sub-header">Get your resume score, missing skills, '
-    'and AI-powered feedback in seconds</p>',
+st.markdown('<p class="sub-header">Know exactly where you stand. ' 'Score your resume, fix your gaps, land your role.</p>',
     unsafe_allow_html=True)
 
 # ── File Upload ───────────────────────────────────────────────────────────────
